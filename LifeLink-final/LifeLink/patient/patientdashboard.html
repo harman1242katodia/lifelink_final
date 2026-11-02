@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LifeLink — Patient Emergency Dashboard</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="patient.css">
+    <style>
+        /* Smart Match Component Styles */
+        .smart-match-card {
+            background: #FFFFFF;
+            border: 1px solid #E2E8F0;
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 28px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+        }
+        .smart-match-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+        .smart-match-header h2 {
+            font-size: 18px;
+            color: #0F172A;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .smart-match-form {
+            display: grid;
+            grid-template-columns: 2fr 1.5fr 1fr auto;
+            gap: 12px;
+            align-items: flex-end;
+            margin-bottom: 20px;
+            background: #F8FAFC;
+            padding: 16px;
+            border-radius: 8px;
+        }
+        .match-field label {
+            display: block;
+            font-size: 12px;
+            font-weight: 600;
+            color: #475569;
+            margin-bottom: 6px;
+        }
+        .match-field input,
+        .match-field select {
+            width: 100%;
+            padding: 10px 12px;
+            border: 1px solid #CBD5E1;
+            border-radius: 6px;
+            font-family: inherit;
+            font-size: 14px;
+            color: #0F172A;
+            background: #FFF;
+        }
+        .btn-smart-search {
+            background: #871622;
+            color: #FFFFFF;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            height: 42px;
+            transition: background 0.2s;
+        }
+        .btn-smart-search:hover {
+            background: #6d111b;
+        }
+        .match-results-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 16px;
+            margin-top: 16px;
+        }
+        .match-result-card {
+            background: #FFFFFF;
+            border: 1px solid #E2E8F0;
+            border-radius: 10px;
+            padding: 16px;
+            transition: transform 0.2s, box-shadow 0.2s;
+            position: relative;
+        }
+        .match-result-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+        .match-badge-locality {
+            background: #DEF7EC;
+            color: #03543F;
+            font-size: 11px;
+            font-weight: 700;
+            padding: 2px 8px;
+            border-radius: 12px;
+            display: inline-block;
+            margin-bottom: 8px;
+        }
+        .match-hospital-name {
+            font-size: 16px;
+            font-weight: 700;
+            color: #0F172A;
+            margin-bottom: 4px;
+        }
+        .match-meta {
+            font-size: 12px;
+            color: #64748B;
+            margin-bottom: 12px;
+        }
+        .match-stats-row {
+            display: flex;
+            gap: 12px;
+            background: #F8FAFC;
+            padding: 10px;
+            border-radius: 6px;
+            margin-bottom: 14px;
+            font-size: 12px;
+        }
+        .match-stat-box {
+            flex: 1;
+        }
+        .match-stat-val {
+            font-weight: 700;
+            font-size: 14px;
+            color: #871622;
+        }
+        .btn-req-from-hosp {
+            width: 100%;
+            background: #0F172A;
+            color: #FFF;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            text-align: center;
+            text-decoration: none;
+            display: block;
+            transition: background 0.2s;
+        }
+        .btn-req-from-hosp:hover {
+            background: #871622;
+        }
+
+        /* Notifications Banner */
+        .patient-notifs-card {
+            background: #FFFBEB;
+            border: 1px solid #FDE68A;
+            border-radius: 8px;
+            padding: 12px 16px;
+            margin-bottom: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        @media (max-width: 768px) {
+            .smart-match-form {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ================= TOP NAVBAR ================= -->
+    <header class="top-navbar">
+        <a href="../home/home.html" class="logo">
+            <div class="logo-icon-box">
+                <i class="fa-solid fa-heart-pulse"></i>
+            </div>
+            <div class="logo-text">
+                <h2>LifeLink</h2>
+                <p>Patient Care Portal</p>
+            </div>
+        </a>
+
+        <nav class="main-nav">
+            <a href="patientdashboard.html" class="active">Dashboard</a>
+            <a href="patient-profile.html">My Profile</a>
+            <a href="emergency-request.html">Emergency Request</a>
+            <a href="my-requests.html">My Requests</a>
+        </nav>
+
+        <button class="logout-btn" id="patientLogoutBtn">
+            <i class="fa-solid fa-arrow-right-from-bracket"></i> Logout
+        </button>
+    </header>
+
+
+    <!-- ================= MAIN CONTENT ================= -->
+    <main class="main-content">
+
+        <!-- Top Bar -->
+        <header class="topbar">
+            <div>
+                <h1>Patient Emergency Dashboard</h1>
+                <p>Monitor your active medical donation requests, hospital responses, and emergency matching.</p>
+            </div>
+
+            <div class="patient-info">
+                <div class="patient-avatar">
+                    <i class="fa-solid fa-user-injured"></i>
+                </div>
+                <div>
+                    <strong id="displayPatientName">Loading...</strong>
+                    <small>Verified Patient Account</small>
+                </div>
+            </div>
+        </header>
+
+        <!-- Notification Banner (if any unread hospital responses) -->
+        <div id="patientNotifsBanner" class="patient-notifs-card" style="display: none;">
+            <div style="display: flex; align-items: center; gap: 10px;">
+                <i class="fa-solid fa-bell" style="color: #D97706; font-size: 18px;"></i>
+                <div id="patientNotifsText" style="font-size: 13px; color: #92400E;">
+                    You have new clinical responses from the hospital network.
+                </div>
+            </div>
+            <a href="my-requests.html" style="font-size: 12px; font-weight: 700; color: #B45309; text-decoration: underline;">View Responses</a>
+        </div>
+
+
+        <!-- Welcome Section -->
+        <section class="welcome-card">
+            <div>
+                <h2>Need Immediate Blood or Organ Replacement?</h2>
+                <p>
+                    Submit urgent clinical requirements directly to our synchronized hospital emergency network in seconds.
+                </p>
+            </div>
+
+            <a href="emergency-request.html" class="emergency-btn">
+                <i class="fa-solid fa-triangle-exclamation"></i> Raise Emergency Request
+            </a>
+        </section>
+
+
+        <!-- Statistics -->
+        <section class="stats-container">
+            <div class="stat-card">
+                <h3 id="statPendingRequests">0</h3>
+                <span>Pending Review</span>
+            </div>
+
+            <div class="stat-card">
+                <h3 id="statReviewedRequests">0</h3>
+                <span>Reviewed by Hospital</span>
+            </div>
+
+            <div class="stat-card">
+                <h3 id="statCompletedRequests">0</h3>
+                <span>Completed Donations</span>
+            </div>
+
+            <div class="stat-card">
+                <h3 id="statTotalRequests">0</h3>
+                <span>Total Applications</span>
+            </div>
+        </section>
+
+
+        <!-- ================= SMART DONOR MATCH COMPONENT ================= -->
+        <section class="smart-match-card">
+            <div class="smart-match-header">
+                <div>
+                    <h2><i class="fa-solid fa-satellite-dish" style="color: #871622;"></i> Smart Donor Match (Proximity & ABO Compatibility)</h2>
+                    <p style="font-size: 13px; color: #64748B; margin-top: 4px;">
+                        Locate verified regional hospitals and active compatible donors ranked by proximity and available reserves.
+                    </p>
+                </div>
+            </div>
+
+            <form id="smartMatchForm" class="smart-match-form">
+                <div class="match-field">
+                    <label for="matchLocality">Patient Locality / Sector</label>
+                    <input type="text" id="matchLocality" placeholder="e.g. Sector 16, Chandigarh" value="Sector 16" required>
+                </div>
+
+                <div class="match-field">
+                    <label for="matchBloodGroup">Required Blood Group</label>
+                    <select id="matchBloodGroup" required>
+                        <option value="A+">A+ (A Positive)</option>
+                        <option value="A-">A- (A Negative)</option>
+                        <option value="B+">B+ (B Positive)</option>
+                        <option value="B-">B- (B Negative)</option>
+                        <option value="AB+">AB+ (Universal Recipient)</option>
+                        <option value="AB-">AB- (AB Negative)</option>
+                        <option value="O+" selected>O+ (O Positive)</option>
+                        <option value="O-">O- (Universal Donor Group)</option>
+                    </select>
+                </div>
+
+                <div class="match-field">
+                    <label for="matchUnits">Units Needed</label>
+                    <input type="number" id="matchUnits" min="1" max="10" value="1">
+                </div>
+
+                <button type="submit" class="btn-smart-search" id="btnSmartSearch">
+                    <i class="fa-solid fa-magnifying-glass"></i> Find Matches
+                </button>
+            </form>
+
+            <div id="smartMatchResultsContainer">
+                <div style="text-align: center; color: #94A3B8; padding: 20px; font-size: 14px;">
+                    Enter your locality and required blood group above to query the verified medical network.
+                </div>
+            </div>
+        </section>
+
+
+        <!-- Recent Requests -->
+        <section class="requests-section">
+            <div class="section-header">
+                <div>
+                    <h2>Recent Emergency Requests & Hospital Responses</h2>
+                    <p>Track clinical progress and hospital determinations.</p>
+                </div>
+
+                <a href="my-requests.html" class="view-all-btn">
+                    View All Requests <i class="fa-solid fa-arrow-right"></i>
+                </a>
+            </div>
+
+            <div class="request-container" id="dashboardRecentContainer">
+                <!-- Dynamically populated -->
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Shared API Client -->
+    <script src="../shared/api-client.js"></script>
+
+    <!-- Patient Controller -->
+    <script src="patient.js"></script>
+
+</body>
+</html>

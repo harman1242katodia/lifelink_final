@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LifeLink — Generate Donor Application</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="donor-requests.css">
+</head>
+
+<body>
+
+    <!-- ================= NAVBAR ================= -->
+    <nav class="navbar">
+        <a href="../home/home.html" class="logo">
+            <div class="logo-icon">
+                <i class="fa-solid fa-heart-pulse"></i>
+            </div>
+            <div class="logo-text">
+                <h2>LifeLink</h2>
+                <p>Donor Registration Portal</p>
+            </div>
+        </a>
+
+        <div class="nav-links">
+            <a href="../home/home.html"><i class="fa-solid fa-house"></i> Home</a>
+            <a href="#donorProfileCard" class="active"><i class="fa-solid fa-user"></i> Profile</a>
+            <button id="donorSignOutBtn" type="button" style="background:#FEE2E2; color:#991B1B; border:1px solid #FCA5A5; padding:6px 14px; border-radius:8px; font-weight:600; font-size:13px; cursor:pointer; display:flex; align-items:center; gap:6px;">
+                <i class="fa-solid fa-arrow-right-from-bracket"></i> Sign Out
+            </button>
+        </div>
+    </nav>
+
+
+    <!-- ================= MAIN PAGE ================= -->
+    <main class="page">
+        <section class="page-heading">
+            <h1>Generate a Life-Saving Donation Application</h1>
+            <p class="subtitle">
+                Complete your donor health profile and route your donation application directly to accredited hospital networks for clinical evaluation.
+            </p>
+        </section>
+
+        <!-- Notification container -->
+        <div id="successMessage" class="hidden"></div>
+
+        <!-- ================= DONOR PROFILE CARD ================= -->
+        <section class="card" id="donorProfileCard" style="margin-bottom: 24px; padding: 20px 24px;">
+            <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px;">
+                <div style="display: flex; align-items: center; gap: 20px;">
+                    <div style="position: relative; width: 72px; height: 72px; flex-shrink: 0;">
+                        <div id="donorAvatarBox" style="width: 72px; height: 72px; border-radius: 50%; overflow: hidden; border: 2px solid #871622; background: #FFF1F2; display: flex; align-items: center; justify-content: center; font-size: 28px; color: #871622;">
+                            <img id="donorProfileImg" src="" alt="Donor Photo" style="display: none; width: 100%; height: 100%; object-fit: cover;">
+                            <i id="donorDefaultIcon" class="fa-solid fa-user"></i>
+                        </div>
+                        <label for="donorPhotoInput" title="Upload new photo (JPG, PNG, WEBP max 2MB)" style="position: absolute; bottom: -2px; right: -2px; background: #871622; color: #FFFFFF; width: 26px; height: 26px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; box-shadow: 0 2px 5px rgba(0,0,0,0.25); font-size: 12px; border: 2px solid #FFFFFF;">
+                            <i class="fa-solid fa-camera"></i>
+                        </label>
+                        <input type="file" id="donorPhotoInput" accept=".jpg,.jpeg,.png,.webp,image/jpeg,image/png,image/webp" style="display: none;">
+                    </div>
+                    <div>
+                        <h3 id="donorProfileDisplayName" style="font-size: 18px; font-weight: 700; color: #0F172A; margin-bottom: 4px;">Verified Donor</h3>
+                        <p id="donorProfileMeta" style="font-size: 13px; color: #64748B; margin: 0;">Your LifeLink donor profile</p>
+                    </div>
+                </div>
+                <div>
+                    <label for="donorPhotoInput" style="background: #F8FAFC; color: #334155; border: 1px solid #CBD5E1; padding: 9px 18px; border-radius: 6px; font-size: 13px; font-weight: 600; cursor: pointer; display: inline-flex; align-items: center; gap: 8px; transition: all 0.2s;">
+                        <i class="fa-solid fa-cloud-arrow-up" style="color: #871622;"></i> Upload Profile Photo
+                    </label>
+                </div>
+            </div>
+        </section>
+
+        <form id="donorForm" novalidate>
+
+            <!-- ================= 1. DONOR INFORMATION ================= -->
+            <section class="card">
+                <div class="section-title">
+                    <div class="section-title-icon">
+                        <i class="fa-solid fa-user"></i>
+                    </div>
+                    <h2>1. Donor Identification & Contact</h2>
+                </div>
+
+                <div class="form-grid">
+                    <div class="form-group full-width">
+                        <label for="donorName">
+                            Full Legal Name <span class="required-mark">*</span>
+                        </label>
+                        <input type="text" id="donorName" placeholder="Enter your full legal name" autocomplete="off">
+                        <small class="field-error" data-error-for="donorName"></small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="age">
+                            Age (Minimum 18) <span class="required-mark">*</span>
+                        </label>
+                        <input type="number" id="age" min="18" max="70" placeholder="Enter age in years" autocomplete="off">
+                        <small class="field-error" data-error-for="age"></small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="gender">
+                            Biological Gender <span class="required-mark">*</span>
+                        </label>
+                        <select id="gender">
+                            <option value="">Select Gender</option>
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                            <option value="Other">Other / Prefer not to say</option>
+                        </select>
+                        <small class="field-error" data-error-for="gender"></small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="bloodGroup">
+                            Blood Group <span class="required-mark">*</span>
+                        </label>
+                        <select id="bloodGroup">
+                            <option value="">Select Blood Group</option>
+                            <option value="A+">A+ (A Positive)</option>
+                            <option value="A-">A- (A Negative)</option>
+                            <option value="B+">B+ (B Positive)</option>
+                            <option value="B-">B- (B Negative)</option>
+                            <option value="AB+">AB+ (AB Positive)</option>
+                            <option value="AB-">AB- (AB Negative)</option>
+                            <option value="O+">O+ (Universal RBC)</option>
+                            <option value="O-">O- (Universal Donor)</option>
+                        </select>
+                        <small class="field-error" data-error-for="bloodGroup"></small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="phone">
+                            Contact Phone Number (10 Digits) <span class="required-mark">*</span>
+                        </label>
+                        <input type="tel" id="phone" placeholder="Enter 10-digit mobile number" maxlength="10" autocomplete="off">
+                        <small class="field-error" data-error-for="phone"></small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">
+                            Email Address <span class="required-mark">*</span>
+                        </label>
+                        <input type="email" id="email" placeholder="Enter your email address" autocomplete="off">
+                        <small class="field-error" data-error-for="email"></small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="city">
+                            City / District <span class="required-mark">*</span>
+                        </label>
+                        <input type="text" id="city" placeholder="Enter city / district" autocomplete="off">
+                        <small class="field-error" data-error-for="city"></small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="state">
+                            State / Province <span class="required-mark">*</span>
+                        </label>
+                        <input type="text" id="state" placeholder="Enter state / province" autocomplete="off">
+                        <small class="field-error" data-error-for="state"></small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="pincode">
+                            Postal Pincode (6 Digits) <span class="required-mark">*</span>
+                        </label>
+                        <input type="text" id="pincode" placeholder="Enter 6-digit postal pincode" maxlength="6" autocomplete="off">
+                        <small class="field-error" data-error-for="pincode"></small>
+                    </div>
+                </div>
+            </section>
+
+
+            <!-- ================= 2. DONATION DETAILS ================= -->
+            <section class="card">
+                <div class="section-title">
+                    <div class="section-title-icon">
+                        <i class="fa-solid fa-hand-holding-medical"></i>
+                    </div>
+                    <h2>2. Donation Category & Specifications</h2>
+                </div>
+
+                <div class="form-group full-width" style="margin-bottom: 24px;">
+                    <label>Select Donation Type <span class="required-mark">*</span></label>
+                    <div class="radio-options-grid">
+                        <label class="radio-pill">
+                            <input type="radio" name="donationType" value="Blood" checked>
+                            <div class="radio-pill-content">
+                                <i class="fa-solid fa-droplet"></i>
+                                <span>Whole Blood</span>
+                            </div>
+                        </label>
+
+                        <label class="radio-pill">
+                            <input type="radio" name="donationType" value="Kidney">
+                            <div class="radio-pill-content">
+                                <i class="fa-solid fa-lungs"></i>
+                                <span>Kidney</span>
+                            </div>
+                        </label>
+
+                        <label class="radio-pill">
+                            <input type="radio" name="donationType" value="Liver">
+                            <div class="radio-pill-content">
+                                <i class="fa-solid fa-dna"></i>
+                                <span>Liver (Living)</span>
+                            </div>
+                        </label>
+
+                        <label class="radio-pill">
+                            <input type="radio" name="donationType" value="Heart">
+                            <div class="radio-pill-content">
+                                <i class="fa-solid fa-heart-pulse"></i>
+                                <span>Heart (Deceased)</span>
+                            </div>
+                        </label>
+
+                        <label class="radio-pill">
+                            <input type="radio" name="donationType" value="Cornea">
+                            <div class="radio-pill-content">
+                                <i class="fa-solid fa-eye"></i>
+                                <span>Cornea / Eye</span>
+                            </div>
+                        </label>
+                    </div>
+                    <small class="field-error" data-error-for="donationType"></small>
+                </div>
+
+                <!-- BLOOD CONDITIONAL FIELDS -->
+                <div id="bloodDetails" class="form-grid">
+                    <div class="form-group">
+                        <label for="bloodGroupDetail">
+                            Target Blood Group <span class="required-mark">*</span>
+                        </label>
+                        <select id="bloodGroupDetail">
+                            <option value="">Select Blood Group</option>
+                            <option value="A+">A+</option>
+                            <option value="A-">A-</option>
+                            <option value="B+">B+</option>
+                            <option value="B-">B-</option>
+                            <option value="AB+">AB+</option>
+                            <option value="AB-">AB-</option>
+                            <option value="O+">O+</option>
+                            <option value="O-">O-</option>
+                        </select>
+                        <small class="field-error" data-error-for="bloodGroupDetail"></small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="requiredUnits">
+                            Available Blood Units <span class="required-mark">*</span>
+                        </label>
+                        <input type="number" id="requiredUnits" min="1" max="5" placeholder="Enter number of units" autocomplete="off">
+                        <small class="field-error" data-error-for="requiredUnits"></small>
+                    </div>
+
+                    <div class="form-group full-width">
+                        <label for="preferredDonationDate">
+                            Preferred Donation Date <span class="required-mark">*</span>
+                        </label>
+                        <input type="date" id="preferredDonationDate">
+                        <small class="field-error" data-error-for="preferredDonationDate"></small>
+                    </div>
+                </div>
+
+                <!-- ORGAN CONDITIONAL FIELDS -->
+                <div id="organDetails" class="form-grid hidden">
+                    <div class="form-group">
+                        <label for="selectedOrgan">
+                            Selected Organ / Tissue <span class="required-mark">*</span>
+                        </label>
+                        <select id="selectedOrgan">
+                            <option value="">Select Organ</option>
+                            <option value="Kidney">Kidney</option>
+                            <option value="Liver">Liver Segment</option>
+                            <option value="Heart">Heart</option>
+                            <option value="Cornea">Cornea</option>
+                            <option value="Lung">Lung</option>
+                            <option value="Bone Marrow">Bone Marrow</option>
+                        </select>
+                        <small class="field-error" data-error-for="selectedOrgan"></small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="organCity">
+                            Preferred Transplant City <span class="required-mark">*</span>
+                        </label>
+                        <input type="text" id="organCity" placeholder="Enter preferred city" autocomplete="off">
+                        <small class="field-error" data-error-for="organCity"></small>
+                    </div>
+
+                    <div class="form-group full-width">
+                        <label for="organAdditionalInfo">
+                            Donor Preferences & Medical Notes
+                        </label>
+                        <textarea id="organAdditionalInfo" rows="3" placeholder="Pledged living donor candidate, prior evaluations, or special clinical notes..."></textarea>
+                    </div>
+                </div>
+
+                <!-- TARGET HOSPITAL SELECTION -->
+                <div class="form-group full-width" style="margin-top: 18px;">
+                    <label for="hospitalName">
+                        Route to Target Hospital <span class="required-mark">*</span>
+                    </label>
+                    <select id="hospitalName">
+                        <option value="">Select Hospital Network</option>
+                    </select>
+                    <small class="field-error" data-error-for="hospitalName"></small>
+                </div>
+            </section>
+
+
+            <!-- ================= 3. HEALTH SCREENING ================= -->
+            <section class="card">
+                <div class="section-title">
+                    <div class="section-title-icon">
+                        <i class="fa-solid fa-heart-pulse"></i>
+                    </div>
+                    <h2>3. Clinical Health & Eligibility Screening</h2>
+                </div>
+
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="weight">
+                            Body Weight (kg) <span class="required-mark">*</span>
+                        </label>
+                        <input type="number" id="weight" min="45" max="200" placeholder="Enter weight in kg" autocomplete="off">
+                        <small class="field-error" data-error-for="weight"></small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="hemoglobin">
+                            Hemoglobin Level (g/dL) <span class="required-mark">*</span>
+                        </label>
+                        <input type="number" id="hemoglobin" step="0.1" min="10" max="20" placeholder="Enter level (e.g. 12.5 - 17.5)" autocomplete="off">
+                        <small class="field-error" data-error-for="hemoglobin"></small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="bloodPressure">
+                            Blood Pressure (Systolic/Diastolic) <span class="required-mark">*</span>
+                        </label>
+                        <input type="text" id="bloodPressure" placeholder="120/80" autocomplete="off">
+                        <small class="field-error" data-error-for="bloodPressure"></small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="chronicDisease">
+                            History of Chronic Diseases <span class="required-mark">*</span>
+                        </label>
+                        <select id="chronicDisease">
+                            <option value="">Select Option</option>
+                            <option value="No">No chronic conditions</option>
+                            <option value="Yes">Yes (Diabetes, Cardiac, etc.)</option>
+                        </select>
+                        <small class="field-error" data-error-for="chronicDisease"></small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="medication">
+                            Currently on Prescription Medication? <span class="required-mark">*</span>
+                        </label>
+                        <select id="medication">
+                            <option value="">Select Option</option>
+                            <option value="No">No active medication</option>
+                            <option value="Yes">Yes (Regular prescriptions)</option>
+                        </select>
+                        <small class="field-error" data-error-for="medication"></small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="allergies">
+                            Known Drug or Food Allergies
+                        </label>
+                        <input type="text" id="allergies" placeholder="List any known allergies, or None" autocomplete="off">
+                        <small class="field-error" data-error-for="allergies"></small>
+                    </div>
+
+                    <div class="form-group full-width">
+                        <label for="smoker">
+                            Tobacco / Nicotine Usage <span class="required-mark">*</span>
+                        </label>
+                        <select id="smoker">
+                            <option value="">Select Option</option>
+                            <option value="No">Non-smoker</option>
+                            <option value="Occasional">Occasional</option>
+                            <option value="Regular">Regular smoker</option>
+                        </select>
+                        <small class="field-error" data-error-for="smoker"></small>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SUBMIT BUTTON -->
+            <div class="form-actions">
+                <button type="submit" class="submit-btn" id="submitBtn">
+                    <i class="fa-solid fa-paper-plane"></i> Submit Application to Hospital
+                </button>
+                <small style="color: var(--text-muted);">
+                    Applications are validated by the Express.js REST API layer and routed directly to the target hospital.
+                </small>
+            </div>
+
+        </form>
+
+        <!-- ================= 4. MY SUBMITTED APPLICATIONS HISTORY ================= -->
+        <section class="card" style="margin-top: 32px;">
+            <div class="section-title">
+                <div class="section-title-icon">
+                    <i class="fa-solid fa-clock-rotate-left"></i>
+                </div>
+                <h2>My Submitted Applications & Status</h2>
+            </div>
+            <div id="donorApplicationsHistory" style="margin-top: 16px;">
+                <p style="color: var(--text-muted); font-size: 14px;">Loading your application history...</p>
+            </div>
+        </section>
+    </main>
+
+    <!-- Shared API Client -->
+    <script src="../shared/api-client.js"></script>
+
+    <!-- Form logic -->
+    <script src="donor-requests.js"></script>
+</body>
+</html>

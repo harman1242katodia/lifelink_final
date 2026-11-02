@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LifeLink — My Emergency Requests</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="patient.css">
+</head>
+
+<body>
+
+    <!-- ================= TOP NAVBAR ================= -->
+    <header class="top-navbar">
+        <a href="../home/home.html" class="logo">
+            <div class="logo-icon-box">
+                <i class="fa-solid fa-heart-pulse"></i>
+            </div>
+            <div class="logo-text">
+                <h2>LifeLink</h2>
+                <p>Patient Care Portal</p>
+            </div>
+        </a>
+
+        <nav class="main-nav">
+            <a href="patientdashboard.html">Dashboard</a>
+            <a href="patient-profile.html">My Profile</a>
+            <a href="emergency-request.html">Emergency Request</a>
+            <a href="my-requests.html" class="active">My Requests</a>
+        </nav>
+
+        <button class="logout-btn">
+            <i class="fa-solid fa-arrow-right-from-bracket"></i> Logout
+        </button>
+    </header>
+
+
+    <!-- ================= MAIN CONTENT ================= -->
+    <main class="main-content">
+
+        <!-- Topbar -->
+        <header class="topbar">
+            <div>
+                <h1>My Emergency Requests</h1>
+                <p>Track the real-time fulfillment status of all your blood and organ donation requests.</p>
+            </div>
+
+            <div class="patient-info">
+                <div class="patient-avatar">
+                    <i class="fa-solid fa-user-injured"></i>
+                </div>
+                <div>
+                    <strong id="displayPatientName">Patient</strong>
+                    <small>Verified Patient</small>
+                </div>
+            </div>
+        </header>
+
+
+        <!-- Request Summary Counters -->
+        <section class="request-summary">
+            <div>
+                <strong id="summaryTotal">0</strong>
+                <span>Total Requests</span>
+            </div>
+
+            <div>
+                <strong id="summaryPending" style="color: var(--status-pending);">0</strong>
+                <span>Pending Triage</span>
+            </div>
+
+            <div>
+                <strong id="summaryAccepted" style="color: var(--status-accepted);">0</strong>
+                <span>Accepted / Matched</span>
+            </div>
+
+            <div>
+                <strong id="summaryCompleted" style="color: #2563EB;">0</strong>
+                <span>Completed Transfers</span>
+            </div>
+        </section>
+
+
+        <!-- Filter Tabs -->
+        <section class="requests-page">
+            <div class="request-tabs">
+                <button class="request-tab active" data-status="all">
+                    All Requests
+                </button>
+                <button class="request-tab" data-status="pending">
+                    <i class="fa-solid fa-clock"></i> Pending
+                </button>
+                <button class="request-tab" data-status="reviewed">
+                    <i class="fa-solid fa-check"></i> Accepted / Matched
+                </button>
+                <button class="request-tab" data-status="completed">
+                    <i class="fa-solid fa-circle-check"></i> Completed
+                </button>
+            </div>
+
+            <!-- Dynamic Cards Container -->
+            <div id="requestList" class="request-container">
+                <!-- Dynamically rendered by patient.js -->
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Shared API Client -->
+    <script src="../shared/api-client.js"></script>
+
+    <!-- Patient Controller -->
+    <script src="patient.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LifeLink — Hospital Clinical Review Dashboard</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="hospital-requests.css">
+    <style>
+        /* Workflow Tabs */
+        .workflow-tabs {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 24px;
+            border-bottom: 2px solid #E2E8F0;
+            padding-bottom: 12px;
+        }
+        .workflow-tab-btn {
+            background: #F8FAFC;
+            border: 1px solid #CBD5E1;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            color: #475569;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.2s ease;
+        }
+        .workflow-tab-btn.active {
+            background: #871622;
+            color: #FFFFFF;
+            border-color: #871622;
+            box-shadow: 0 2px 8px rgba(135, 22, 34, 0.25);
+        }
+        .workflow-tab-btn .badge-pill {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 12px;
+        }
+        .workflow-tab-btn:not(.active) .badge-pill {
+            background: #E2E8F0;
+            color: #334155;
+        }
+
+        /* Priority Tag styling */
+        .priority-badge-high {
+            background: #FEE2E2;
+            color: #991B1B;
+            border: 1px solid #FCA5A5;
+            padding: 3px 10px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 700;
+        }
+        .priority-badge-medium {
+            background: #FEF3C7;
+            color: #92400E;
+            border: 1px solid #FCD34D;
+            padding: 3px 10px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 700;
+        }
+        .priority-badge-low {
+            background: #E0F2FE;
+            color: #0369A1;
+            border: 1px solid #BAE6FD;
+            padding: 3px 10px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        /* Clinical Review Modal */
+        .modal-overlay {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(15, 23, 42, 0.6);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+            padding: 20px;
+        }
+        .modal-overlay.active {
+            display: flex;
+        }
+        .modal-card {
+            background: #FFFFFF;
+            border-radius: 14px;
+            max-width: 580px;
+            width: 100%;
+            padding: 28px;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.2);
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            border-bottom: 1px solid #E2E8F0;
+            padding-bottom: 12px;
+        }
+        .modal-header h3 {
+            font-size: 18px;
+            color: #0F172A;
+            font-weight: 700;
+        }
+        .modal-close-btn {
+            background: none;
+            border: none;
+            font-size: 20px;
+            color: #64748B;
+            cursor: pointer;
+        }
+        .form-group-modal {
+            margin-bottom: 16px;
+        }
+        .form-group-modal label {
+            display: block;
+            font-size: 13px;
+            font-weight: 600;
+            color: #334155;
+            margin-bottom: 6px;
+        }
+        .form-group-modal select,
+        .form-group-modal textarea,
+        .form-group-modal input {
+            width: 100%;
+            padding: 10px 12px;
+            border: 1px solid #CBD5E1;
+            border-radius: 8px;
+            font-family: inherit;
+            font-size: 14px;
+            color: #0F172A;
+        }
+        .form-group-modal textarea {
+            resize: vertical;
+            min-height: 90px;
+        }
+        .modal-actions {
+            display: flex;
+            gap: 12px;
+            justify-content: flex-end;
+            margin-top: 24px;
+        }
+        .btn-modal-cancel {
+            background: #F1F5F9;
+            color: #475569;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+        .btn-modal-submit {
+            background: #871622;
+            color: #FFFFFF;
+            border: none;
+            padding: 10px 22px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background 0.2s;
+        }
+        .btn-modal-submit:hover {
+            background: #6d111b;
+        }
+
+        /* Responses History in Request Card */
+        .response-history-box {
+            background: #F8FAFC;
+            border: 1px solid #E2E8F0;
+            border-radius: 8px;
+            padding: 12px;
+            margin-top: 14px;
+        }
+        .response-history-title {
+            font-size: 12px;
+            font-weight: 700;
+            color: #475569;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .response-entry {
+            border-left: 3px solid #871622;
+            padding-left: 10px;
+            margin-bottom: 8px;
+            font-size: 13px;
+        }
+        .response-meta {
+            font-size: 11px;
+            color: #64748B;
+            margin-bottom: 2px;
+        }
+
+        .logout-btn-header {
+            background: #FEE2E2;
+            color: #991B1B;
+            border: 1px solid #FCA5A5;
+            padding: 6px 14px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 13px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .logout-btn-header:hover {
+            background: #FCA5A5;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ================= NAVBAR ================= -->
+    <header class="navbar">
+        <a href="../home/home.html" class="logo-section">
+            <div class="logo-icon">
+                <i class="fa-solid fa-heart-pulse"></i>
+            </div>
+            <div class="logo-text">
+                <h2>LifeLink</h2>
+                <p>Hospital Clinical Portal</p>
+            </div>
+        </a>
+
+        <nav class="nav-links">
+            <a href="../home/home.html"><i class="fa-solid fa-house"></i> Home</a>
+            <a href="hospital-requests.html" class="active"><i class="fa-solid fa-clipboard-check"></i> Review Portal</a>
+            <a href="hospital-register.html"><i class="fa-solid fa-hospital-user"></i> Hospital Profile</a>
+
+            <!-- REGISTERED HOSPITAL BADGE -->
+            <div class="hospital-badge" title="Active Hospital Facility">
+                <i class="fa-solid fa-hospital"></i>
+                <div class="hospital-badge-text">
+                    <span>Active Facility</span>
+                    <strong id="registeredHospitalName">Loading...</strong>
+                </div>
+            </div>
+
+            <button id="hospitalSignOutBtn" class="logout-btn-header">
+                <i class="fa-solid fa-arrow-right-from-bracket"></i> Sign Out
+            </button>
+        </nav>
+    </header>
+
+
+    <!-- ================= MAIN PAGE ================= -->
+    <main class="page">
+
+        <!-- ================= PAGE HEADING ================= -->
+        <section class="page-heading">
+            <div class="page-heading-left">
+                <h1>Hospital Clinical Review Portal</h1>
+                <p class="subtitle">
+                    Review assigned emergency patient requests and evaluate voluntary donor pledges. Submit written clinical determinations, triage priorities, and dispatch updates.
+                </p>
+            </div>
+
+            <div>
+                <a href="hospital-register.html" class="hospital-switch-btn">
+                    <i class="fa-solid fa-hospital-user"></i> View / Edit Facility Profile
+                </a>
+            </div>
+        </section>
+
+        <!-- ================= WORKFLOW TABS ================= -->
+        <div class="workflow-tabs">
+            <button id="tabPatientRequests" class="workflow-tab-btn active">
+                <i class="fa-solid fa-truck-medical"></i> Emergency Patient Requests
+                <span id="patientRequestsCountBadge" class="badge-pill">0</span>
+            </button>
+            <button id="tabDonorApplications" class="workflow-tab-btn">
+                <i class="fa-solid fa-hand-holding-heart"></i> Volunteer Donor Applications
+                <span id="donorApplicationsCountBadge" class="badge-pill">0</span>
+            </button>
+        </div>
+
+
+        <!-- ================= SUMMARY METRICS ================= -->
+        <section class="summary-grid">
+            <div class="summary-card total">
+                <span>Total Assigned Records <i class="fa-solid fa-folder-open"></i></span>
+                <strong id="totalCount">0</strong>
+            </div>
+
+            <div class="summary-card pending">
+                <span>Pending Review <i class="fa-solid fa-clock"></i></span>
+                <strong id="pendingCount">0</strong>
+            </div>
+
+            <div class="summary-card accepted">
+                <span>Reviewed / Accepted <i class="fa-solid fa-circle-check"></i></span>
+                <strong id="acceptedCount">0</strong>
+            </div>
+
+            <div class="summary-card rejected">
+                <span>Action Required / Declined <i class="fa-solid fa-circle-exclamation"></i></span>
+                <strong id="rejectedCount">0</strong>
+            </div>
+        </section>
+
+
+        <!-- ================= FILTER BAR ================= -->
+        <section class="filter-container">
+            <div class="filter-bar" id="filterBarContainer">
+                <button class="filter-btn active" data-filter="All">
+                    All Records
+                </button>
+                <button class="filter-btn" data-filter="Pending Review">
+                    <i class="fa-solid fa-hourglass-half"></i> Pending Review
+                </button>
+                <button class="filter-btn" data-filter="Under Review">
+                    <i class="fa-solid fa-magnifying-glass"></i> Under Review
+                </button>
+                <button class="filter-btn" data-filter="Reviewed — Response Sent">
+                    <i class="fa-solid fa-reply"></i> Response Sent
+                </button>
+                <button class="filter-btn" data-filter="Completed">
+                    <i class="fa-solid fa-check-double"></i> Completed
+                </button>
+            </div>
+
+            <div class="filter-info" id="filterInfoText">
+                Showing all assigned records
+            </div>
+        </section>
+
+
+        <!-- ================= REQUESTS & APPLICATIONS LIST ================= -->
+        <section id="requestsList" class="requests-list">
+            <!-- Dynamically populated via hospital-requests.js -->
+        </section>
+
+    </main>
+
+    <!-- ================= CLINICAL RESPONSE MODAL (PATIENT REQUEST) ================= -->
+    <div id="patientResponseModal" class="modal-overlay">
+        <div class="modal-card">
+            <div class="modal-header">
+                <h3><i class="fa-solid fa-stethoscope" style="color: #871622;"></i> Submit Clinical Review & Response</h3>
+                <button type="button" class="modal-close-btn" id="closePatientResponseModal">&times;</button>
+            </div>
+
+            <div id="modalPatientSummary" style="background:#F8FAFC; padding:12px; border-radius:8px; margin-bottom:16px; font-size:13px; line-height:1.5; border:1px solid #E2E8F0;">
+                <!-- Populated with patient requirement and priority -->
+            </div>
+
+            <form id="patientResponseForm">
+                <input type="hidden" id="modalRequestId" value="">
+
+                <div class="form-group-modal">
+                    <label for="modalResponseStatus">Review Determination / New Status *</label>
+                    <select id="modalResponseStatus" required>
+                        <option value="Reviewed — Response Sent">Reviewed — Response Sent (Dispatch / Stock Reserved)</option>
+                        <option value="Under Review">Under Review (Evaluating Lab & Transfusion Window)</option>
+                        <option value="More Information Required">More Information Required (Clinical Vitals / Ward Confirmation)</option>
+                        <option value="Unable to Proceed — Explanation Sent">Unable to Proceed — Explanation Sent (Stock Depleted / Incompatible)</option>
+                        <option value="Completed">Completed (Confirmed Transfusion / Surgery Finished)</option>
+                    </select>
+                </div>
+
+                <div class="form-group-modal">
+                    <label for="modalResponseMessage">Written Clinical Response Message *</label>
+                    <textarea id="modalResponseMessage" placeholder="Provide medical guidance, reserve confirmation, ward instructions, or explanation for the patient..." required></textarea>
+                </div>
+
+                <div class="form-group-modal" id="explanationGroup" style="display: none;">
+                    <label for="modalExplanationReason" style="color:#991B1B;">Reason for Inability to Proceed *</label>
+                    <input type="text" id="modalExplanationReason" placeholder="State clinical reason (e.g., Rare antibody conflict, zero stock across network)">
+                </div>
+
+                <div class="form-group-modal" id="completionConfirmGroup" style="display: none; background:#FEF3C7; padding:10px; border-radius:6px;">
+                    <label style="display:flex; align-items:center; gap:8px; font-weight:600; font-size:13px; color:#92400E; cursor:pointer;">
+                        <input type="checkbox" id="modalCompletionConfirm">
+                        I confirm that the medical donation / transfusion has been physically completed.
+                    </label>
+                </div>
+
+                <div class="modal-actions">
+                    <button type="button" class="btn-modal-cancel" id="cancelPatientResponseModal">Cancel</button>
+                    <button type="submit" class="btn-modal-submit" id="submitPatientResponseBtn">
+                        <i class="fa-solid fa-paper-plane"></i> Submit Response
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- ================= DONOR APPLICATION DECISION MODAL ================= -->
+    <div id="donorDecisionModal" class="modal-overlay">
+        <div class="modal-card">
+            <div class="modal-header">
+                <h3><i class="fa-solid fa-hand-holding-heart" style="color: #871622;"></i> Clinical Decision on Donor Application</h3>
+                <button type="button" class="modal-close-btn" id="closeDonorDecisionModal">&times;</button>
+            </div>
+
+            <div id="modalDonorSummary" style="background:#F8FAFC; padding:12px; border-radius:8px; margin-bottom:16px; font-size:13px; line-height:1.5; border:1px solid #E2E8F0;">
+                <!-- Populated with donor pledge and health screening info -->
+            </div>
+
+            <form id="donorDecisionForm">
+                <input type="hidden" id="modalApplicationId" value="">
+
+                <div class="form-group-modal">
+                    <label for="modalDecisionStatus">Clinical Decision *</label>
+                    <select id="modalDecisionStatus" required>
+                        <option value="Accepted">Accepted (Pledge Accepted — Clinical Appointment Scheduled)</option>
+                        <option value="Under Review">Under Review (Awaiting Medical Screening Evaluation)</option>
+                        <option value="More Information Required">More Information Required</option>
+                        <option value="Rejected">Rejected (Ineligible Based on Clinical Screening)</option>
+                    </select>
+                </div>
+
+                <div class="form-group-modal" id="donorInstructionsGroup">
+                    <label for="modalDonorInstructions">Appointment / Ward Instructions</label>
+                    <textarea id="modalDonorInstructions" placeholder="Please report to Transfusion Room 204 on preferred date at 10:00 AM fasting..."></textarea>
+                </div>
+
+                <div class="form-group-modal" id="donorExplanationGroup" style="display: none;">
+                    <label for="modalDonorExplanation" style="color:#991B1B;">Clinical Reason for Declining *</label>
+                    <input type="text" id="modalDonorExplanation" placeholder="e.g., Hemoglobin below minimum threshold or active medication conflict">
+                </div>
+
+                <div class="modal-actions">
+                    <button type="button" class="btn-modal-cancel" id="cancelDonorDecisionModal">Cancel</button>
+                    <button type="submit" class="btn-modal-submit" id="submitDonorDecisionBtn">
+                        <i class="fa-solid fa-check"></i> Save Decision
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Shared API Client -->
+    <script src="../shared/api-client.js"></script>
+
+    <!-- Hospital Dashboard Controller -->
+    <script src="hospital-requests.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,383 @@
+/* ==============================================================================
+ * LifeLink — Modern Donor Request Form Styles (Milestone 1)
+ * Deep Burgundy (#871622), Charcoal (#0F172A), Off-White (#F8FAFC)
+ * ============================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap');
+@import url('../shared/theme.css');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-body);
+    background-color: var(--bg-page);
+    color: var(--text-primary);
+    min-height: 100vh;
+}
+
+/* =====================================================
+   NAVBAR
+   ===================================================== */
+.navbar {
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 5%;
+    background: #FFFFFF;
+    border-bottom: 1px solid var(--border-subtle);
+    box-shadow: var(--shadow-xs);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+}
+
+.logo-icon {
+    width: 44px;
+    height: 44px;
+    background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
+    color: #FFFFFF;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(135, 22, 34, 0.25);
+}
+
+.logo-text h2 {
+    font-size: 22px;
+    font-family: var(--font-heading);
+    color: var(--color-primary);
+    font-weight: 800;
+    line-height: 1.1;
+}
+
+.logo-text p {
+    font-size: 11px;
+    color: var(--text-muted);
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: var(--text-secondary);
+    font-size: 14px;
+    font-weight: 500;
+    transition: var(--transition-fast);
+    padding: 6px 0;
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+    color: var(--color-primary);
+}
+
+.logout-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 7px 16px;
+    border-radius: var(--radius-md);
+    background: var(--bg-surface-alt);
+    color: var(--text-secondary) !important;
+    border: 1px solid var(--border-subtle);
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.logout-link:hover {
+    background: #FEE2E2;
+    color: #DC2626 !important;
+    border-color: #FECACA;
+}
+
+/* =====================================================
+   PAGE LAYOUT
+   ===================================================== */
+.page {
+    max-width: 980px;
+    margin: 0 auto;
+    padding: 40px 24px 80px;
+}
+
+.page-heading {
+    text-align: center;
+    margin-bottom: 36px;
+}
+
+.page-heading h1 {
+    font-size: 32px;
+    font-family: var(--font-heading);
+    color: var(--text-primary);
+    margin-bottom: 8px;
+}
+
+.subtitle {
+    color: var(--text-muted);
+    font-size: 15px;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* =====================================================
+   FORM CARDS
+   ===================================================== */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+}
+
+.card {
+    background: #FFFFFF;
+    border-radius: var(--radius-xl);
+    border: 1px solid var(--border-subtle);
+    box-shadow: var(--shadow-sm);
+    padding: 34px;
+    transition: var(--transition-fast);
+}
+
+.card:hover {
+    box-shadow: var(--shadow-md);
+}
+
+.section-title {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 24px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--border-subtle);
+}
+
+.section-title-icon {
+    width: 38px;
+    height: 38px;
+    border-radius: 10px;
+    background: var(--color-primary-light);
+    color: var(--color-primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+}
+
+.section-title h2 {
+    font-size: 20px;
+    font-family: var(--font-heading);
+    color: var(--text-primary);
+}
+
+/* GRIDS */
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px 24px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.form-group.full-width {
+    grid-column: 1 / -1;
+}
+
+.form-group label {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-secondary);
+}
+
+.required-mark {
+    color: #DC2626;
+    margin-left: 2px;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    padding: 12px 14px;
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-md);
+    font-size: 14px;
+    font-family: var(--font-body);
+    color: var(--text-primary);
+    background: #FFFFFF;
+    outline: none;
+    transition: var(--transition-fast);
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px rgba(135, 22, 34, 0.12);
+}
+
+.form-group.invalid input,
+.form-group.invalid select {
+    border-color: #DC2626;
+    background-color: #FEF2F2;
+}
+
+.field-error {
+    font-size: 12px;
+    color: #DC2626;
+    font-weight: 500;
+    min-height: 18px;
+}
+
+/* DONATION TYPE RADIO PILLS */
+.radio-options-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+    gap: 12px;
+}
+
+.radio-pill {
+    position: relative;
+    cursor: pointer;
+}
+
+.radio-pill input[type="radio"] {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.radio-pill-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    padding: 14px;
+    border-radius: var(--radius-md);
+    background: var(--bg-surface-alt);
+    border: 1px solid var(--border-subtle);
+    transition: var(--transition-fast);
+    text-align: center;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-secondary);
+}
+
+.radio-pill-content i {
+    font-size: 20px;
+    color: var(--color-primary);
+}
+
+.radio-pill:hover .radio-pill-content {
+    background: var(--color-primary-light);
+    border-color: rgba(135, 22, 34, 0.2);
+}
+
+.radio-pill input[type="radio"]:checked + .radio-pill-content {
+    background: #FFFFFF;
+    color: var(--color-primary);
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 2px var(--color-primary), var(--shadow-sm);
+}
+
+/* SUBMIT BUTTON & FEEDBACK */
+.form-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.submit-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    background: var(--color-primary);
+    color: #FFFFFF;
+    border: none;
+    border-radius: var(--radius-md);
+    padding: 15px 40px;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 4px 14px rgba(135, 22, 34, 0.3);
+    transition: var(--transition-normal);
+    min-width: 280px;
+}
+
+.submit-btn:hover {
+    background: var(--color-primary-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(135, 22, 34, 0.4);
+}
+
+.success-banner {
+    width: 100%;
+    padding: 18px 24px;
+    border-radius: var(--radius-lg);
+    background: #ECFDF5;
+    border: 1px solid #A7F3D0;
+    color: #065F46;
+    font-size: 14px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+}
+
+.success-banner a {
+    color: #047857;
+    text-decoration: underline;
+    font-weight: 700;
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+    .navbar {
+        height: auto;
+        padding: 16px;
+        flex-direction: column;
+        gap: 14px;
+    }
+
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .card {
+        padding: 24px 18px;
+    }
+
+    .radio-options-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}

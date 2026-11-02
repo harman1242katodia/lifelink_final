@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LifeLink — Raise Emergency Request</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="patient.css">
+</head>
+
+<body>
+
+    <!-- ================= TOP NAVBAR ================= -->
+    <header class="top-navbar">
+        <a href="../home/home.html" class="logo">
+            <div class="logo-icon-box">
+                <i class="fa-solid fa-heart-pulse"></i>
+            </div>
+            <div class="logo-text">
+                <h2>LifeLink</h2>
+                <p>Patient Care Portal</p>
+            </div>
+        </a>
+
+        <nav class="main-nav">
+            <a href="patientdashboard.html">Dashboard</a>
+            <a href="patient-profile.html">My Profile</a>
+            <a href="emergency-request.html" class="active">Emergency Request</a>
+            <a href="my-requests.html">My Requests</a>
+        </nav>
+
+        <button class="logout-btn">
+            <i class="fa-solid fa-arrow-right-from-bracket"></i> Logout
+        </button>
+    </header>
+
+
+    <!-- ================= MAIN CONTENT ================= -->
+    <main class="main-content">
+
+        <!-- Topbar -->
+        <header class="topbar">
+            <div>
+                <h1>Raise Emergency Request</h1>
+                <p>Dispatch high-priority blood and organ requests directly to accredited regional hospitals.</p>
+            </div>
+
+            <div class="patient-info">
+                <div class="patient-avatar">
+                    <i class="fa-solid fa-user-injured"></i>
+                </div>
+                <div>
+                    <strong id="displayPatientName">Patient</strong>
+                    <small>Verified Patient</small>
+                </div>
+            </div>
+        </header>
+
+
+        <!-- Emergency Form Card -->
+        <section class="emergency-form-card">
+            <div class="form-heading">
+                <div class="emergency-icon">
+                    <i class="fa-solid fa-triangle-exclamation"></i>
+                </div>
+                <div>
+                    <h2>Emergency Donation Triage Form</h2>
+                    <p>
+                        Provide accurate clinical and hospital details so medical staff and compatible donors can respond immediately.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Form -->
+            <form id="emergencyForm">
+
+                <!-- 1. Donation Type -->
+                <div class="form-section">
+                    <h3>1. What is the emergency requirement?</h3>
+                    <div class="donation-options">
+                        <label class="donation-option">
+                            <input type="radio" name="donationType" value="blood" id="bloodOption" checked>
+                            <div>
+                                <i class="fa-solid fa-droplet" style="color: #DC2626; font-size: 20px; margin-right: 8px;"></i>
+                                <strong>Blood Donation</strong>
+                                <small style="display: block; color: var(--text-muted); margin-top: 4px;">Whole blood, plasma, or platelets requirement</small>
+                            </div>
+                        </label>
+
+                        <label class="donation-option">
+                            <input type="radio" name="donationType" value="organ" id="organOption">
+                            <div>
+                                <i class="fa-solid fa-lungs" style="color: #2563EB; font-size: 20px; margin-right: 8px;"></i>
+                                <strong>Organ Transplant</strong>
+                                <small style="display: block; color: var(--text-muted); margin-top: 4px;">Solid organ replacement (Kidney, Liver, Heart, etc.)</small>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- 2. Blood Information -->
+                <div class="form-section conditional-section" id="bloodSection">
+                    <h3>2. Blood Specification</h3>
+                    <div class="form-group">
+                        <label for="bloodGroup">Required Blood Group <span class="required-mark">*</span></label>
+                        <select id="bloodGroup">
+                            <option value="">Select Blood Group</option>
+                            <option value="A+">A+ (A Positive)</option>
+                            <option value="A-">A- (A Negative)</option>
+                            <option value="B+">B+ (B Positive)</option>
+                            <option value="B-">B- (B Negative)</option>
+                            <option value="AB+">AB+ (AB Positive)</option>
+                            <option value="AB-">AB- (AB Negative)</option>
+                            <option value="O+">O+ (O Positive)</option>
+                            <option value="O-">O- (O Negative)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- 2. Organ Information -->
+                <div class="form-section conditional-section" id="organSection" style="display: none;">
+                    <h3>2. Organ Specification</h3>
+                    <div class="form-group">
+                        <label for="organRequired">Required Organ / Tissue <span class="required-mark">*</span></label>
+                        <select id="organRequired">
+                            <option value="">Select Organ</option>
+                            <option value="Kidney">Kidney</option>
+                            <option value="Liver">Liver Segment</option>
+                            <option value="Heart">Heart</option>
+                            <option value="Lung">Lung</option>
+                            <option value="Pancreas">Pancreas</option>
+                            <option value="Cornea">Cornea</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- 3. Hospital Information -->
+                <div class="form-section">
+                    <h3>3. Treating Hospital & Location</h3>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="hospital">Target Hospital Facility <span class="required-mark">*</span></label>
+                            <select id="hospital" required>
+                                <option value="">Select Verified Hospital Network</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="location">City / Ward / Room <span class="required-mark">*</span></label>
+                            <input type="text" id="location" placeholder="e.g. Sector 16, ICU Ward 3">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 4. Emergency Details -->
+                <div class="form-section">
+                    <h3>4. Clinical Triage & Urgency</h3>
+                    <div class="form-group">
+                        <label for="priority">Emergency Priority Level <span class="required-mark">*</span></label>
+                        <select id="priority">
+                            <option value="">Select Priority Level</option>
+                            <option value="Critical">Critical (Immediate surgery / Under 4 hours)</option>
+                            <option value="High">High (Needed within 24 hours)</option>
+                            <option value="Normal">Normal (Scheduled within 72 hours)</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="description">Emergency Clinical Summary <span class="required-mark">*</span></label>
+                        <textarea id="description" rows="4" placeholder="Briefly describe the clinical condition, units needed, and patient status..."></textarea>
+                    </div>
+                </div>
+
+                <!-- Form Actions -->
+                <div class="form-actions">
+                    <button type="reset" class="cancel-btn">
+                        <i class="fa-solid fa-arrow-rotate-left"></i> Reset Form
+                    </button>
+
+                    <button type="submit" class="submit-request-btn" id="patientSubmitBtn">
+                        <i class="fa-solid fa-paper-plane"></i> Submit Emergency Request
+                    </button>
+                </div>
+
+            </form>
+        </section>
+
+    </main>
+
+    <!-- Shared API Client -->
+    <script src="../shared/api-client.js"></script>
+
+    <!-- Patient Controller -->
+    <script src="patient.js"></script>
+
+</body>
+</html>

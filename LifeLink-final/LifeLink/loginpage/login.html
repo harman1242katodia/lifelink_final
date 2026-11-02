@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LifeLink — Healthcare Portal Authentication</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="container">
+
+    <!-- =====================================================
+         LEFT HERO & STATS
+         ===================================================== -->
+    <div class="left">
+        <div>
+            <!-- LOGO -->
+            <a href="../home/home.html" class="logo">
+                <div class="logo-icon-box">
+                    <i class="fa-solid fa-heart-pulse"></i>
+                </div>
+                <div class="logo-text">
+                    <h1>LifeLink</h1>
+                    <p>Healthcare Donor Network</p>
+                </div>
+            </a>
+
+            <!-- ALERT -->
+            <div class="alert-box">
+                <i class="fa-solid fa-bell"></i>
+                <span>12 Active Emergency Requests Today</span>
+            </div>
+
+            <!-- HERO TEXT -->
+            <div class="hero-text">
+                <h1>Save Lives,<br><span>Be a Hero.</span></h1>
+                <p>
+                    LifeLink connects voluntary blood and organ donors with patients and accredited hospitals during emergencies. Real-time coordination and clinical reliability.
+                </p>
+            </div>
+
+            <!-- STATS -->
+            <div class="stats">
+                <div class="card">
+                    <i class="fa-solid fa-users"></i>
+                    <div>
+                        <h3>25,000+</h3>
+                        <p>Registered Donors</p>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <i class="fa-solid fa-hospital"></i>
+                    <div>
+                        <h3>500+</h3>
+                        <p>Hospitals Connected</p>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <i class="fa-solid fa-bolt"></i>
+                    <div>
+                        <h3>Instant</h3>
+                        <p>Emergency Triage</p>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <i class="fa-solid fa-shield-halved"></i>
+                    <div>
+                        <h3>Secure</h3>
+                        <p>Clinical Network</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="left-footer">
+            <span>© 2026 LifeLink Technologies</span>
+            <a href="../home/home.html"><i class="fa-solid fa-arrow-left"></i> Return to Homepage</a>
+        </div>
+    </div>
+
+
+    <!-- =====================================================
+         RIGHT SIDE: FLIP CARD (REGISTER / LOGIN)
+         ===================================================== -->
+    <div class="right">
+        <a href="../home/home.html" class="back-home-link">
+            <i class="fa-solid fa-arrow-left"></i> Back to Homepage
+        </a>
+
+        <div class="login-card" id="loginCard">
+
+            <!-- ================= FRONT: SIGN UP ================= -->
+            <div class="card-face card-front">
+                <h1>Create Account</h1>
+                <p>Register as a donor, patient, or medical center.</p>
+
+                <h4>Select User Role</h4>
+                <div class="roles">
+                    <div class="role active" data-role="Donor">
+                        <i class="fa-solid fa-hand-holding-heart"></i>
+                        <span>Donor</span>
+                    </div>
+
+                    <div class="role" data-role="Patient">
+                        <i class="fa-solid fa-user-injured"></i>
+                        <span>Patient</span>
+                    </div>
+
+                    <div class="role" data-role="Hospital">
+                        <i class="fa-solid fa-hospital"></i>
+                        <span>Hospital</span>
+                    </div>
+                </div>
+
+                <!-- SIGNUP FORM -->
+                <form id="signupForm">
+                    <div class="input-box">
+                        <i class="fa-solid fa-user"></i>
+                        <input id="signupName" type="text" placeholder="Full legal name" required>
+                    </div>
+
+                    <div class="input-box">
+                        <i class="fa-solid fa-envelope"></i>
+                        <input id="signupEmail" type="email" placeholder="Email address" required>
+                    </div>
+
+                    <div class="input-box">
+                        <i class="fa-solid fa-lock"></i>
+                        <input id="signupPassword" type="password" placeholder="Create password (min 6 characters)" required>
+                    </div>
+
+                    <div class="input-box">
+                        <i class="fa-solid fa-shield-check"></i>
+                        <input id="signupConfirmPassword" type="password" placeholder="Confirm password" required>
+                    </div>
+
+                    <button id="signupBtn" type="button" class="submit-btn">
+                        <i class="fa-solid fa-user-plus"></i> Create Account
+                    </button>
+                </form>
+
+                <p class="switch">
+                    Already have an account? <a href="#" id="showLogin">Sign In</a>
+                </p>
+
+                
+            </div>
+
+
+            <!-- ================= BACK: LOGIN ================= -->
+            <div class="card-face card-back">
+                <h1>Welcome Back</h1>
+                <p>Sign in to access your LifeLink portal.</p>
+
+                <h4>Access Portal As</h4>
+                <div class="roles">
+                    <div class="role active" data-role="Donor">
+                        <i class="fa-solid fa-hand-holding-heart"></i>
+                        <span>Donor</span>
+                    </div>
+
+                    <div class="role" data-role="Patient">
+                        <i class="fa-solid fa-user-injured"></i>
+                        <span>Patient</span>
+                    </div>
+
+                    <div class="role" data-role="Hospital">
+                        <i class="fa-solid fa-hospital"></i>
+                        <span>Hospital</span>
+                    </div>
+                </div>
+
+                <!-- LOGIN FORM -->
+                <form id="loginForm">
+                    <div class="input-box">
+                        <i class="fa-solid fa-envelope"></i>
+                        <input id="loginEmail" type="email" placeholder="Registered email" required>
+                    </div>
+
+                    <div class="input-box">
+                        <i class="fa-solid fa-lock"></i>
+                        <input id="loginPassword" type="password" placeholder="Password" required>
+                        <i class="fa-solid fa-eye toggle"></i>
+                    </div>
+
+                    <a href="#" class="forgot" onclick="alert('Password reset instructions would be dispatched to your email.'); return false;">Forgot password?</a>
+
+                    <button id="loginBtn" type="button" class="submit-btn">
+                        <i class="fa-solid fa-arrow-right-to-bracket"></i> Sign In
+                    </button>
+                </form>
+
+                <p class="switch">
+                    Don't have an account? <a href="#" id="showSignup">Register Now</a>
+                </p>
+
+            
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+<!-- Shared API Client & Toast -->
+<script src="../shared/api-client.js"></script>
+<script src="log.js"></script>
+
+</body>
+</html>

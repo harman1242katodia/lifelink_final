@@ -1,0 +1,496 @@
+/* ==============================================================================
+ * LifeLink — Modern Healthcare Authentication (Milestone 1)
+ * Deep Burgundy (#871622), Charcoal (#0F172A), Off-White (#F8FAFC)
+ * ============================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap');
+@import url('../shared/theme.css');
+
+:root {
+    --primary: #871622;
+    --primary-dark: #6B0F19;
+    --primary-light: #FDF2F3;
+    --primary-hover: #75121D;
+    --bg: #F8FAFC;
+    --text: #0F172A;
+    --muted: #64748B;
+    --border: #E2E8F0;
+    --white: #FFFFFF;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: var(--font-body);
+}
+
+body {
+    background: var(--bg);
+    min-height: 100vh;
+    color: var(--text);
+    overflow-x: hidden;
+}
+
+/* =====================================================
+   MAIN CONTAINER
+   ===================================================== */
+.container {
+    display: flex;
+    min-height: 100vh;
+    width: 100%;
+}
+
+/* =====================================================
+   LEFT BRANDING / HERO SIDE
+   ===================================================== */
+.left {
+    width: 50%;
+    padding: 60px 8%;
+    background: linear-gradient(135deg, #0F172A 0%, #1E293B 100%);
+    color: #FFFFFF;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+    overflow: hidden;
+}
+
+.left::after {
+    content: '';
+    position: absolute;
+    bottom: -150px;
+    right: -150px;
+    width: 400px;
+    height: 400px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(135, 22, 34, 0.3) 0%, transparent 70%);
+    pointer-events: none;
+}
+
+.logo {
+    display: flex;
+    gap: 14px;
+    align-items: center;
+    text-decoration: none;
+}
+
+.logo-icon-box {
+    width: 44px;
+    height: 44px;
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+    color: #FFFFFF;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    box-shadow: 0 4px 12px rgba(135, 22, 34, 0.4);
+}
+
+.logo-text h1 {
+    font-family: var(--font-heading);
+    font-size: 24px;
+    font-weight: 800;
+    color: #FFFFFF;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+}
+
+.logo-text p {
+    font-size: 11px;
+    color: #94A3B8;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-weight: 500;
+}
+
+.alert-box {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 18px;
+    border-radius: 30px;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    color: #FCA5A5;
+    font-size: 13px;
+    font-weight: 500;
+    margin-top: 36px;
+    width: fit-content;
+}
+
+.alert-box i {
+    color: #EF4444;
+}
+
+.hero-text {
+    margin-top: 40px;
+}
+
+.hero-text h1 {
+    font-size: 46px;
+    line-height: 1.18;
+    font-weight: 800;
+    font-family: var(--font-heading);
+    color: #FFFFFF;
+}
+
+.hero-text span {
+    color: #F87171;
+}
+
+.hero-text p {
+    margin-top: 18px;
+    color: #94A3B8;
+    line-height: 1.7;
+    font-size: 15px;
+    max-width: 480px;
+}
+
+.stats {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+    margin-top: 36px;
+}
+
+.card {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 14px;
+    padding: 16px 18px;
+    display: flex;
+    gap: 14px;
+    align-items: center;
+}
+
+.card i {
+    width: 42px;
+    height: 42px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.1);
+    color: #FCA5A5;
+    font-size: 18px;
+}
+
+.card h3 {
+    font-size: 18px;
+    color: #FFFFFF;
+    font-family: var(--font-heading);
+}
+
+.card p {
+    font-size: 12px;
+    color: #94A3B8;
+}
+
+.left-footer {
+    padding-top: 24px;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 12px;
+    color: #64748B;
+}
+
+.left-footer a {
+    color: #94A3B8;
+    text-decoration: none;
+}
+
+.left-footer a:hover {
+    color: #FFFFFF;
+}
+
+/* =====================================================
+   RIGHT AUTH FORM SIDE (FLIP CARD CONTAINER)
+   ===================================================== */
+.right {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 40px 24px;
+    perspective: 1400px;
+    background: var(--bg);
+}
+
+.back-home-link {
+    align-self: flex-start;
+    margin-left: max(20px, calc(50% - 240px));
+    margin-bottom: 20px;
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: var(--transition-fast);
+}
+
+.back-home-link:hover {
+    color: var(--primary);
+}
+
+.login-card {
+    width: 100%;
+    max-width: 480px;
+    min-height: 640px;
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.login-card.flipped {
+    transform: rotateY(180deg);
+}
+
+/* CARD FACES */
+.card-face {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    min-height: 100%;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-xl);
+    padding: 38px 36px;
+    box-shadow: var(--shadow-lg);
+    display: flex;
+    flex-direction: column;
+}
+
+.card-back {
+    transform: rotateY(180deg);
+}
+
+.card-face h1 {
+    font-size: 26px;
+    margin-bottom: 6px;
+    color: var(--text);
+}
+
+.card-face > p {
+    color: var(--muted);
+    font-size: 14px;
+    margin-bottom: 22px;
+}
+
+.card-face h4 {
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--muted);
+    margin-bottom: 12px;
+}
+
+/* ROLE SELECTION TABS */
+.roles {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    margin-bottom: 22px;
+    background: var(--bg);
+    padding: 4px;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border);
+}
+
+.role {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    padding: 10px 8px;
+    border-radius: var(--radius-sm);
+    background: transparent;
+    cursor: pointer;
+    transition: var(--transition-fast);
+    color: var(--muted);
+    text-align: center;
+    font-size: 12px;
+    font-weight: 600;
+    border: 1px solid transparent;
+}
+
+.role i {
+    font-size: 16px;
+}
+
+.role:hover {
+    color: var(--text);
+    background: rgba(255, 255, 255, 0.6);
+}
+
+.role.active {
+    background: var(--white);
+    color: var(--primary);
+    box-shadow: var(--shadow-sm);
+    border-color: rgba(135, 22, 34, 0.15);
+}
+
+/* FORM ELEMENTS */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.input-box {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.input-box i:first-child {
+    position: absolute;
+    left: 14px;
+    color: var(--muted);
+    font-size: 14px;
+    pointer-events: none;
+}
+
+.input-box input {
+    width: 100%;
+    padding: 12px 14px 12px 42px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    font-size: 14px;
+    color: var(--text);
+    background: var(--white);
+    transition: var(--transition-fast);
+    outline: none;
+}
+
+.input-box input:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(135, 22, 34, 0.12);
+}
+
+.input-box .toggle {
+    position: absolute;
+    right: 14px;
+    color: var(--muted);
+    cursor: pointer;
+    font-size: 14px;
+    left: auto;
+    pointer-events: auto;
+}
+
+.input-box .toggle:hover {
+    color: var(--text);
+}
+
+/* ACTIONS */
+.forgot {
+    align-self: flex-end;
+    font-size: 13px;
+    color: var(--muted);
+    text-decoration: none;
+    transition: var(--transition-fast);
+}
+
+.forgot:hover {
+    color: var(--primary);
+}
+
+.submit-btn {
+    width: 100%;
+    padding: 13px;
+    background: var(--primary);
+    color: #FFFFFF;
+    border: none;
+    border-radius: var(--radius-md);
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition-fast);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 8px;
+    box-shadow: 0 2px 8px rgba(135, 22, 34, 0.25);
+}
+
+.submit-btn:hover {
+    background: var(--primary-hover);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 14px rgba(135, 22, 34, 0.35);
+}
+
+.switch {
+    margin-top: 20px;
+    text-align: center;
+    font-size: 13px;
+    color: var(--muted);
+}
+
+.switch a {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 600;
+    margin-left: 4px;
+}
+
+.switch a:hover {
+    text-decoration: underline;
+}
+
+/* DEMO QUICK HELPER */
+.demo-helper-box {
+    margin-top: auto;
+    padding-top: 18px;
+    border-top: 1px solid var(--border);
+    font-size: 12px;
+    color: var(--muted);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.demo-helper-box code {
+    background: var(--bg);
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 11px;
+    border: 1px solid var(--border);
+}
+
+/* =====================================================
+   RESPONSIVE DESIGN
+   ===================================================== */
+@media (max-width: 980px) {
+    .container {
+        flex-direction: column;
+    }
+
+    .left {
+        width: 100%;
+        padding: 40px 6%;
+    }
+
+    .right {
+        width: 100%;
+        padding: 40px 6%;
+    }
+
+    .hero-text h1 {
+        font-size: 36px;
+    }
+
+    .login-card {
+        max-width: 480px;
+    }
+}

@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LifeLink — Hospital Clinical Onboarding</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="hospital-register.css">
+</head>
+
+<body>
+
+    <div class="page">
+
+        <!-- ================= LEFT BRANDING SECTION ================= -->
+        <section class="left-section">
+            <div>
+                <a href="../home/home.html" class="brand">
+                    <div class="logo-box">
+                        <i class="fa-solid fa-heart-pulse"></i>
+                    </div>
+                    <div class="brand-text">
+                        <h2>LifeLink</h2>
+                        <p>Hospital Clinical Portal</p>
+                    </div>
+                </a>
+
+                <div class="emergency-alert">
+                    <i class="fa-solid fa-bell"></i>
+                    <span>12 Active Emergency Requests Today across verified networks</span>
+                </div>
+
+                <div class="hero-content">
+                    <h1>Join the Certified <span>Healthcare Network</span></h1>
+                    <p>
+                        Connect your clinical facility to LifeLink's centralized donor dispatch protocol. Accelerate critical organ and blood transfers with automated matching.
+                    </p>
+
+                    <div class="benefits-list">
+                        <div class="benefit-item">
+                            <i class="fa-solid fa-circle-check"></i>
+                            <div>
+                                <strong>Clinical Decision Console</strong>
+                                <span>Real-time triage with instant Accept/Reject donor matching.</span>
+                            </div>
+                        </div>
+
+                        <div class="benefit-item">
+                            <i class="fa-solid fa-circle-check"></i>
+                            <div>
+                                <strong>REST API Architecture</strong>
+                                <span>Express backend with standardized JSON endpoints and payload validation.</span>
+                            </div>
+                        </div>
+
+                        <div class="benefit-item">
+                            <i class="fa-solid fa-circle-check"></i>
+                            <div>
+                                <strong>Accredited Facility Security</strong>
+                                <span>Protected institutional access for authorized medical personnel.</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="left-footer">
+                <span>© 2026 LifeLink Technologies</span>
+                <a href="../home/home.html"><i class="fa-solid fa-arrow-left"></i> Back to Homepage</a>
+            </div>
+        </section>
+
+
+        <!-- ================= RIGHT REGISTRATION FORM ================= -->
+        <section class="right-section">
+            <div class="form-header">
+                <h2>Hospital Facility Registration</h2>
+                <p>Register your hospital or medical center to review incoming donor applications.</p>
+            </div>
+
+            <form id="hospitalForm" action="./hospital-requests.html" method="GET" class="register-form" novalidate>
+
+                <div class="form-group">
+                    <label for="hospitalName">Hospital / Medical Center Name <span class="required-mark">*</span></label>
+                    <input type="text" id="hospitalName" placeholder="e.g. City Care Hospital">
+                    <small id="hospitalNameError" class="error-text"></small>
+                </div>
+
+                <div class="form-group">
+                    <label for="licenseNumber">Medical License / Accreditation Number <span class="required-mark">*</span></label>
+                    <input type="text" id="licenseNumber" placeholder="e.g. LIC-MED-2026-9901">
+                    <small id="licenseError" class="error-text"></small>
+                </div>
+
+                <div class="form-group">
+                    <label for="address">Full Facility Address & City <span class="required-mark">*</span></label>
+                    <input type="text" id="address" placeholder="e.g. Sector 16, Chandigarh, Punjab">
+                    <small id="addressError" class="error-text"></small>
+                </div>
+
+                <div class="form-group">
+                    <label for="contact">Hospital Emergency Hotline (10 Digits) <span class="required-mark">*</span></label>
+                    <input type="tel" id="contact" placeholder="e.g. 9876543210" maxlength="10">
+                    <small id="contactError" class="error-text"></small>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Official Administrative Email <span class="required-mark">*</span></label>
+                    <input type="email" id="email" placeholder="e.g. admissions@cityhospital.org">
+                    <small id="emailError" class="error-text"></small>
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Create Security Password <span class="required-mark">*</span></label>
+                    <input type="password" id="password" placeholder="At least 8 chars, 1 uppercase, 1 lowercase, 1 number, 1 special">
+                    <small id="passwordError" class="error-text"></small>
+                </div>
+
+                <div class="terms-group">
+                    <input type="checkbox" id="terms">
+                    <label for="terms">I agree to the Healthcare Provider Terms & Patient Privacy Guidelines</label>
+                </div>
+
+                <button type="submit" class="submit-btn">
+                    <i class="fa-solid fa-building-circle-check"></i> Register Hospital
+                </button>
+
+            </form>
+        </section>
+
+    </div>
+
+    <!-- Shared API Client -->
+    <script src="../shared/api-client.js"></script>
+    <script src="hospital-register.js"></script>
+
+</body>
+</html>

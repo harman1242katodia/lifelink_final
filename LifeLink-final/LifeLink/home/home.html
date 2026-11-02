@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LifeLink — Smart Emergency Blood & Organ Donation Platform</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="/home/home.css">
+</head>
+
+<body>
+
+    <!-- ================= NAVBAR ================= -->
+    <nav class="navbar">
+        <a href="/home/home.html" class="logo">
+            <div class="logo-icon-box">
+                <i class="fa-solid fa-heart-pulse"></i>
+            </div>
+            <div class="logo-text">
+                <h2>LifeLink</h2>
+                <p>Healthcare Donor Network</p>
+            </div>
+        </a>
+
+        <div class="nav-links">
+            <a href="/home/home.html" class="active">Home</a>
+            <a href="#about">About</a>
+            <a href="#portals">Portals</a>
+            <a href="#how-it-works">How It Works</a>
+        </div>
+
+        <div class="nav-portal-links">
+            <a href="/loginpage/login.html?role=donor" data-donor-entry="true" class="portal-tag">Donor</a>
+            <a href="/loginpage/login.html?role=hospital" class="portal-tag">Hospital</a>
+            <a href="/loginpage/login.html?role=patient" class="portal-tag">Patient</a>
+            <a href="/loginpage/login.html" class="btn-nav-login">
+                <i class="fa-solid fa-right-to-bracket"></i> Sign In
+            </a>
+        </div>
+    </nav>
+
+
+    <!-- ================= HERO SECTION ================= -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="badge-tag">
+                <i class="fa-solid fa-shield-halved"></i> Next-Gen Healthcare Technology
+            </div>
+
+            <h1>
+                One Donation. <span>One Hope.</span> One Life Saved.
+            </h1>
+
+            <p class="hero-text">
+                LifeLink seamlessly connects altruistic blood and organ donors with accredited hospitals and emergency patients in need. Real-time coordination, instant alerts, and clinical reliability.
+            </p>
+
+            <div class="hero-buttons">
+                <a href="/loginpage/login.html?role=donor" data-donor-entry="true" class="primary-btn">
+                    <i class="fa-solid fa-hand-holding-medical"></i> Register as Donor
+                </a>
+
+                <a href="/loginpage/login.html?role=patient&redirect=/patient/emergency-request.html" class="secondary-btn">
+                    <i class="fa-solid fa-triangle-exclamation" style="color: #DC2626;"></i> Emergency Request
+                </a>
+            </div>
+
+            <div class="hero-trust">
+                <div class="trust-item">
+                    <i class="fa-solid fa-circle-check"></i> Verified Hospital Network
+                </div>
+                <div class="trust-item">
+                    <i class="fa-solid fa-circle-check"></i> REST API Powered
+                </div>
+                <div class="trust-item">
+                    <i class="fa-solid fa-circle-check"></i> Rapid Triage System
+                </div>
+            </div>
+        </div>
+
+        <!-- Interactive Right Card -->
+        <div class="hero-card">
+            <div class="card-icon-pill">
+                <i class="fa-solid fa-droplet"></i>
+            </div>
+
+            <h2>Give the Gift of Life</h2>
+            <p>
+                Your single donation can save up to three lives during critical trauma and emergency surgeries.
+            </p>
+
+            <div class="hero-stats-grid">
+                <div class="hero-stat-box">
+                    <strong id="statDonors">25,000+</strong>
+                    <span>Pledged Donors</span>
+                </div>
+                <div class="hero-stat-box">
+                    <strong id="statHospitals">500+</strong>
+                    <span>Connected Hospitals</span>
+                </div>
+            </div>
+
+            <div class="hero-stat">
+                <strong>Every second matters.</strong>
+                <span>Instant dispatch alert network</span>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ================= THREE PORTALS OVERVIEW ================= -->
+    <section class="modules-section" id="portals">
+        <div class="section-heading">
+            <span class="section-badge">UNIFIED HEALTHCARE ECOSYSTEM</span>
+            <h2>Dedicated Modules for <span>Every Stakeholder</span></h2>
+            <p>Tailored workflows specifically built for Donors, Hospitals, and Patients.</p>
+            <div class="heading-line"></div>
+        </div>
+
+        <div class="module-cards-grid">
+            <!-- Donor Portal -->
+            <div class="module-portal-card portal-donor">
+                <div>
+                    <div class="portal-icon-header">
+                        <div class="portal-avatar">
+                            <i class="fa-solid fa-hand-holding-heart"></i>
+                        </div>
+                        <span class="portal-pill">Donor Module</span>
+                    </div>
+
+                    <h3>Donor Network</h3>
+                    <p>Register as a willing blood or organ donor, log your health metrics, and send donation requests directly to nearby verified hospitals.</p>
+
+                    <ul class="portal-features-list">
+                        <li><i class="fa-solid fa-check"></i> Blood & Organ pledges</li>
+                        <li><i class="fa-solid fa-check"></i> Health & vitals self-reporting</li>
+                        <li><i class="fa-solid fa-check"></i> Hospital matching selection</li>
+                    </ul>
+                </div>
+
+                <a href="/loginpage/login.html?role=donor" data-donor-entry="true" class="portal-action-btn">
+                    Access Donor Portal <i class="fa-solid fa-arrow-right"></i>
+                </a>
+            </div>
+
+            <!-- Hospital Portal -->
+            <div class="module-portal-card portal-hospital">
+                <div>
+                    <div class="portal-icon-header">
+                        <div class="portal-avatar">
+                            <i class="fa-solid fa-hospital"></i>
+                        </div>
+                        <span class="portal-pill">Hospital Module</span>
+                    </div>
+
+                    <h3>Hospital Dashboard</h3>
+                    <p>Review incoming donor applications, filter by emergency triage levels, and utilize the clinical Accept/Reject workflow.</p>
+
+                    <ul class="portal-features-list">
+                        <li><i class="fa-solid fa-check"></i> Live Accept / Reject interface</li>
+                        <li><i class="fa-solid fa-check"></i> Summary triage metrics</li>
+                        <li><i class="fa-solid fa-check"></i> MongoDB & Mongoose clinical records</li>
+                    </ul>
+                </div>
+
+                <a href="/loginpage/login.html?role=hospital" class="portal-action-btn">
+                    Access Hospital Portal <i class="fa-solid fa-arrow-right"></i>
+                </a>
+            </div>
+
+            <!-- Patient Portal -->
+            <div class="module-portal-card portal-patient">
+                <div>
+                    <div class="portal-icon-header">
+                        <div class="portal-avatar">
+                            <i class="fa-solid fa-bed-pulse"></i>
+                        </div>
+                        <span class="portal-pill">Patient Module</span>
+                    </div>
+
+                    <h3>Patient Requests</h3>
+                    <p>Post critical emergency blood or organ replacement requirements directly to regional hospital networks with prioritized urgency tags.</p>
+
+                    <ul class="portal-features-list">
+                        <li><i class="fa-solid fa-check"></i> Emergency blood & organ requests</li>
+                        <li><i class="fa-solid fa-check"></i> Real-time status tracking</li>
+                        <li><i class="fa-solid fa-check"></i> Critical priority dispatch</li>
+                    </ul>
+                </div>
+
+                <a href="/loginpage/login.html?role=patient" class="portal-action-btn">
+                    Access Patient Portal <i class="fa-solid fa-arrow-right"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ================= ABOUT ================= -->
+    <section class="about" id="about">
+        <div class="about-content">
+            <div class="about-text">
+                <span class="section-badge">ABOUT LIFELINK</span>
+                <h3>Bridging the Critical Gap in Emergency Donation Logistics</h3>
+                <p>
+                    LifeLink was conceptualized to solve the critical friction during medical emergencies when time is of the essence. Fragmented communication between patients, blood banks, and donors causes preventable delays.
+                </p>
+                <p>
+                    By introducing a structured digital protocol backed by an Express.js REST API layer, LifeLink streamlines request creation, clinical verification, and hospital acceptance into a transparent single-pane platform.
+                </p>
+                <p>
+                    Our ecosystem supports both acute <strong>Blood emergencies</strong> and complex <strong>Organ and Tissue donation</strong> channels.
+                </p>
+            </div>
+
+            <div class="about-cards">
+                <div class="info-card">
+                    <div class="info-icon">
+                        <i class="fa-solid fa-droplet"></i>
+                    </div>
+                    <div class="info-card-text">
+                        <h3>Blood Donation Network</h3>
+                        <p>Rapid dispatch for trauma, surgical reserves, and severe anemia emergencies across all blood groups.</p>
+                    </div>
+                </div>
+
+                <div class="info-card">
+                    <div class="info-icon">
+                        <i class="fa-solid fa-dna"></i>
+                    </div>
+                    <div class="info-card-text">
+                        <h3>Organ & Tissue Transplants</h3>
+                        <p>Facilitating living and deceased donor registries with accredited surgical transplant centers.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ================= FEATURES ================= -->
+    <section class="features">
+        <div class="section-heading">
+            <span class="section-badge">PLATFORM CAPABILITIES</span>
+            <h2>Why Healthcare Providers <span>Trust LifeLink</span></h2>
+            <p>Engineered for stability, data transparency, and clinical efficiency.</p>
+            <div class="heading-line"></div>
+        </div>
+
+        <div class="feature-grid">
+            <div class="feature-card">
+                <div class="feature-icon-box">
+                    <i class="fa-solid fa-user-check"></i>
+                </div>
+                <h3>Streamlined Registration</h3>
+                <p>Intuitive onboarding with basic health screening for weight, hemoglobin, and medical history.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon-box">
+                    <i class="fa-solid fa-hospital-user"></i>
+                </div>
+                <h3>Hospital Decision Suite</h3>
+                <p>Hospital staff review donor eligibility and accept or reject requests with immediate status updates.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon-box">
+                    <i class="fa-solid fa-bolt"></i>
+                </div>
+                <h3>Express REST APIs</h3>
+                <p>RESTful client-server architecture serving JSON payloads with HTTP error and validation handling.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon-box">
+                    <i class="fa-solid fa-shield-heart"></i>
+                </div>
+                <h3>Triage Prioritization</h3>
+                <p>Categorization into Critical, High, and Medium priority tiers for rapid emergency handling.</p>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ================= HOW IT WORKS ================= -->
+    <section class="how-it-works" id="how-it-works">
+        <div class="section-heading">
+            <span class="section-badge">SIMPLIFIED WORKFLOW</span>
+            <h2>Three Steps to Save a Life</h2>
+            <div class="heading-line"></div>
+        </div>
+
+        <div class="steps">
+            <div class="step">
+                <div class="step-number">01</div>
+                <h3>Register & Screen</h3>
+                <p>Create a verified LifeLink account and submit your donor preferences or emergency medical requirement.</p>
+            </div>
+
+            <div class="step">
+                <div class="step-number">02</div>
+                <h3>Hospital Triage</h3>
+                <p>Target hospitals review compatibility, verify blood units or donor criteria, and update decision status.</p>
+            </div>
+
+            <div class="step">
+                <div class="step-number">03</div>
+                <h3>Life-Saving Match</h3>
+                <p>Coordinated clinical transfer through certified medical personnel and emergency blood banks.</p>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ================= FINAL SIGNUP ================= -->
+    <section class="signup-section">
+        <div class="signup-box">
+            <div class="signup-badge-icon">
+                <i class="fa-solid fa-heart-pulse"></i>
+            </div>
+            <h2>Ready to Make an Impact?</h2>
+            <p>
+                Join thousands of donors and medical centers across our collaborative network. Every registration brings a patient closer to recovery.
+            </p>
+            <a href="/loginpage/login.html" class="signup-btn">
+                <i class="fa-solid fa-user-plus"></i> Get Started Today
+            </a>
+        </div>
+    </section>
+
+
+    <!-- ================= FOOTER ================= -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-col">
+                <div class="footer-logo">
+                    <div class="logo-icon-box" style="width: 36px; height: 36px; font-size: 16px;">
+                        <i class="fa-solid fa-heart-pulse"></i>
+                    </div>
+                    <div>
+                        <h2>LifeLink</h2>
+                        <p>Donor Network</p>
+                    </div>
+                </div>
+                <p class="footer-desc">
+                    A modern healthcare technology platform connecting donors, patients, and accredited hospitals for life-saving donations.
+                </p>
+            </div>
+
+            <div class="footer-col">
+                <h4>Modules</h4>
+                <ul>
+                    <li><a href="/loginpage/login.html?role=donor" data-donor-entry="true">Donor Portal</a></li>
+                    <li><a href="/loginpage/login.html?role=hospital">Hospital Review</a></li>
+                    <li><a href="/loginpage/login.html?role=patient">Patient Dashboard</a></li>
+                    <li><a href="/loginpage/login.html?role=patient&redirect=/patient/emergency-request.html">Emergency Request</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h4>Platform</h4>
+                <ul>
+                    <li><a href="#about">About LifeLink</a></li>
+                    <li><a href="#how-it-works">How It Works</a></li>
+                    <li><a href="/loginpage/login.html">Sign In / Register</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>© 2026 LifeLink Technologies. Blood and Organ Donation Coordination Network.</p>
+            <p>Deep Burgundy & Charcoal Healthcare UI System.</p>
+        </div>
+    </footer>
+
+    <!-- Shared API Client -->
+    <script src="/shared/api-client.js"></script>
+    <script>
+        // Keep the donor session when navigating Home -> Donor Portal.
+        // The JWT remains in localStorage; this only changes the destination link.
+        document.addEventListener("DOMContentLoaded", function () {
+            if (!window.LifeLinkAPI || !window.LifeLinkAPI.isAuthenticated()) return;
+            if ((window.LifeLinkAPI.getRole() || "").toLowerCase() !== "donor") return;
+
+            document.querySelectorAll("[data-donor-entry]").forEach(function (link) {
+                link.href = "/hospital-donor/donor-requests.html";
+                if (link.textContent.toLowerCase().includes("register")) {
+                    link.innerHTML = '<i class="fa-solid fa-user"></i> Open Donor Profile';
+                } else if (link.textContent.toLowerCase().includes("access")) {
+                    link.innerHTML = 'Open Donor Portal <i class="fa-solid fa-arrow-right"></i>';
+                } else {
+                    link.textContent = "Donor Profile";
+                }
+            });
+        });
+    </script>
+</body>
+</html>

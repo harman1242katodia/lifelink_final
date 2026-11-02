@@ -1,0 +1,7 @@
+node_modules/
+.env
+LifeLink-backup/
+LifeLink-milestone1-backup/
+server.milestone1.bak.js
+npm-debug.log*
+.DS_Store
